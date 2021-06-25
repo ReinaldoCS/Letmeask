@@ -52,8 +52,9 @@
       "no-use-before-define": "off",
       "@typescript-eslint/no-use-before-define": ["error"],
       "react/jsx-props-no-spreading": "off",
-      "import/no-duplicates": "error",
+      // "import/no-duplicates": "error",
       "react/button-has-type": ["off"],
-      "react/destructuring-assignment": "off"
+      "react/destructuring-assignment": "off",
+      "import/no-duplicates": ["error", {"considerQueryString": true}]
     }
 }

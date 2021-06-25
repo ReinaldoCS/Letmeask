@@ -5,5 +5,5 @@ import '../styles/button.scss';
 type PropsButton = ButtonHTMLAttributes<HTMLButtonElement>;
 
 export function Button(props: PropsButton) {
-  return <button type="button" className="button" {...props} />;
+  return <button type="submit" className="button" {...props} />;
 }
