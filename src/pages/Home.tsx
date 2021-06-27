@@ -7,6 +7,7 @@ import { database } from '../services/firebase';
 import ilustrationImg from '../assets/images/illustration.svg';
 import logoImg from '../assets/images/logo.svg';
 import googleIconImg from '../assets/images/google-icon.svg';
+import githubIconImg from '../assets/images/github-icon.svg';
 
 import { Button } from '../components/Button';
 
@@ -14,7 +15,7 @@ import '../styles/auth.scss';
 
 function Home() {
   const history = useHistory();
-  const { user, signInWithGoogle } = useAuth();
+  const { user, signInWithGoogle, signInWithGithub } = useAuth();
   const [roomCode, setRoomCode] = useState('');
 
   async function handleCreateRoom() {
@@ -23,6 +24,10 @@ function Home() {
     }
 
     history.push('/rooms/new');
+  }
+
+  async function handleCreateRoomGitHub() {
+    await signInWithGithub();
   }
 
   async function handlejoinRoom(event: FormEvent) {
@@ -55,13 +60,18 @@ function Home() {
         <div className="main-container">
           <img src={logoImg} alt="Letmeask" />
           <button
-            type="submit"
-            onClick={handleCreateRoom}
-            className="create-room"
+            onClick={handleCreateRoomGitHub}
+            className="create-room-github"
           >
+            <img src={githubIconImg} alt="Logo do Google" />
+            Crie sua sala com o GitHub
+          </button>
+
+          <button onClick={handleCreateRoom} className="create-room-google">
             <img src={googleIconImg} alt="Logo do Google" />
             Crie sua sala com o Google
           </button>
+
           <div className="separetor">ou entre em uma sala</div>
           <form onSubmit={handlejoinRoom}>
             <input
