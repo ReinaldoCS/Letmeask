@@ -1,21 +1,25 @@
 import { FormEvent, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { useAuth } from '../hooks/useAuth';
-import { database } from '../services/firebase';
+import { useAuth } from '../../hooks/useAuth';
+import { useTheme } from '../../hooks/useTheme';
+import { database } from '../../services/firebase';
 
-import ilustrationImg from '../assets/images/illustration.svg';
-import logoImg from '../assets/images/logo.svg';
-import googleIconImg from '../assets/images/google-icon.svg';
-import githubIconImg from '../assets/images/github-icon.svg';
+import ilustrationImg from '../../assets/images/illustration.svg';
+import logoImg from '../../assets/images/logo.svg';
+import logoImgDark from '../../assets/images/logo-dark.svg';
+import googleIconImg from '../../assets/images/google-icon.svg';
+import githubIconImg from '../../assets/images/github-icon.svg';
 
-import { Button } from '../components/Button';
+import { Button } from '../../components/Button/index';
+import { ToggleSwitchTheme } from '../../components/ToggleSwitchTheme/index';
 
-import '../styles/auth.scss';
+import './styles.scss';
 
 function Home() {
   const history = useHistory();
   const { user, signInWithGoogle, signInWithGithub } = useAuth();
+  const { isDark } = useTheme();
   const [roomCode, setRoomCode] = useState('');
 
   async function handleCreateRoom() {
@@ -40,7 +44,7 @@ function Home() {
     const roomRef = await database.ref(`rooms/${roomCode}`).get();
 
     if (!roomRef.exists()) {
-      alert('Room does not exists.'); // Melhora: tirar alert e montrar erro no input
+      // alert('Room does not exists.'); // Melhora: tirar alert e montrar erro no input
       return;
     }
     history.push(`/rooms/${roomCode}`);
@@ -58,7 +62,9 @@ function Home() {
       </aside>
       <main>
         <div className="main-container">
-          <img src={logoImg} alt="Letmeask" />
+          {/* <h1>{theme}</h1> */}
+          <ToggleSwitchTheme />
+          <img src={isDark ? logoImgDark : logoImg} alt="Letmeask" />
           <button
             onClick={handleCreateRoomGitHub}
             className="create-room-github"
@@ -66,12 +72,10 @@ function Home() {
             <img src={githubIconImg} alt="Logo do Google" />
             Crie sua sala com o GitHub
           </button>
-
           <button onClick={handleCreateRoom} className="create-room-google">
             <img src={googleIconImg} alt="Logo do Google" />
             Crie sua sala com o Google
           </button>
-
           <div className="separetor">ou entre em uma sala</div>
           <form onSubmit={handlejoinRoom}>
             <input

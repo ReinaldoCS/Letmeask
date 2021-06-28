@@ -7,10 +7,10 @@ import { useAuth } from '../hooks/useAuth';
 import ilustrationImg from '../assets/images/illustration.svg';
 import logoImg from '../assets/images/logo.svg';
 
-import { Button } from '../components/Button';
+import { Button } from '../components/Button/index';
 import { database } from '../services/firebase';
 
-import '../styles/auth.scss';
+// import '../styles/auth.scss';
 
 function NewRoom() {
   const history = useHistory();

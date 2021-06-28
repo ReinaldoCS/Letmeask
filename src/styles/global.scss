@@ -1,3 +1,51 @@
+:root{
+  --text: #29292E;
+  --content: #f8f8f8;
+  --gray: #737380;
+  --gray-light: #DBDCDD;
+  --purple: #835AFD;
+  --pink: #E559F9;
+  --red: #E73F5D;
+
+  --border: #e2e2e2;
+  --border-details: #a8a8b3;
+
+  --primary-color: #fff;
+  --secondary-color: #000;
+
+  --overlay: #050206CC;
+  --background-modal: #fff;
+
+  --background: #f8f8f8;
+  --background-container: #fefefe;
+  --background-question-highlighted: #F4F0FF;
+  --background-question-answered: #DBDCDD;
+}
+
+:root.dark {
+  --text: #f8f8f8;
+  --content: #B8B8B8;
+  --gray: #737380;
+  --gray-light: #DBDCDD;
+  --purple: #4b0082;
+  --pink: #aa1bec;
+  --red: #8a0e24;
+
+  --border: #575454;
+  --border-details: #555555;
+
+  --primary-color: #000;
+  --secondary-color: #fff;
+
+  --overlay: #050206CC;
+  --background-modal: #000;
+
+  --background: #000;
+  --background-container: #131213;
+  --background-question-highlighted: #222454;
+  --background-question-answered: #222333;
+}
+
 * {
   margin: 0;
   padding: 0;

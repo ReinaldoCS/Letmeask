@@ -6,8 +6,8 @@ import { useAuth } from '../hooks/useAuth';
 import { database } from '../services/firebase';
 
 import logoImg from '../assets/images/logo.svg';
-import { Button } from '../components/Button';
-import { RoomCode } from '../components/RoomCode';
+import { Button } from '../components/Button/index';
+import { RoomCode } from '../components/RoomCode/index';
 
 import '../styles/rooms.scss';
 
