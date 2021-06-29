@@ -2,15 +2,15 @@ import { useState, FormEvent } from 'react';
 
 import { Link, useHistory } from 'react-router-dom';
 
-import { useAuth } from '../hooks/useAuth';
+import { useAuth } from '../../hooks/useAuth';
 
-import ilustrationImg from '../assets/images/illustration.svg';
-import logoImg from '../assets/images/logo.svg';
+import ilustrationImg from '../../assets/images/illustration.svg';
+import logoImg from '../../assets/images/logo.svg';
 
-import { Button } from '../components/Button/index';
-import { database } from '../services/firebase';
+import { Button } from '../../components/Button/index';
+import { database } from '../../services/firebase';
 
-// import '../styles/auth.scss';
+import './styles.scss';
 
 function NewRoom() {
   const history = useHistory();
@@ -48,7 +48,7 @@ function NewRoom() {
       <main>
         <div className="main-container">
           <img src={logoImg} alt="Letmeask" />
-          <h2>Criar uma nova sala</h2>
+          <h2>Criar uma nova sala 🌚</h2>
 
           <form onSubmit={handleCreateRoom}>
             <input

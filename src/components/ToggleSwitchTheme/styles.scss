@@ -13,7 +13,7 @@ label {
   }
 
   .slider {
-    background: #ccc;
+    background: var(--background-question-answered);
     bottom: 0;
     left: 0;
     right: 0;
@@ -24,22 +24,28 @@ label {
 
     &::before {
       content: "";
-      background: #fff;
       bottom: 4px;
       height: 24px;
       left: 4px;
       position: absolute;
       width: 24px;
 
+      background: url('../../assets/images/sun-fill.svg') no-repeat center center;
+      background-color: var(--primary-color);
+
       transition: .4s;
     }
   }
 
   input:checked + .slider {
-    background: #66bb6a;
+    background-color: var(--background-question-answered);
   }
 
   input:checked + .slider:before {
+    background: url('../../assets/images/moon-fill.svg') no-repeat center center;
+    background-color: var(--background);
+
+
     transform: translateX(26px);
   }
 

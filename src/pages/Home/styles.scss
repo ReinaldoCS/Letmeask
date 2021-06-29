@@ -54,7 +54,6 @@
 
     > img {
       align-self: center;
-      color: red;
     }
 
     form {
@@ -62,7 +61,8 @@
         height: 50px;
         border-radius: 5px;
         padding: 0 16px;
-        border: 1px solid var(--border-details);
+        border: 1px solid var(--border);
+        background: var(--primary-color);
       }
       button {
         margin-top: 16px;
@@ -82,7 +82,7 @@
     font-weight: 500;
     background: #24292e;
     // color: var(--primary-color);
-    color: var(--primary-color);
+    color: var(--white);
 
     display: flex;
     align-items: center;
@@ -109,7 +109,7 @@
     border-radius: 8px;
     font-weight: 500;
     background: #ea4335;
-    color: var(--primary-color);
+    color: var(--white);
 
     display: flex;
     align-items: center;
