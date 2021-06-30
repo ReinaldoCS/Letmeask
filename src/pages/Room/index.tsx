@@ -2,14 +2,14 @@ import { useState, useEffect, FormEvent } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { Toaster, toast } from 'react-hot-toast';
-import { useAuth } from '../hooks/useAuth';
-import { database } from '../services/firebase';
+import { useAuth } from '../../hooks/useAuth';
+import { database } from '../../services/firebase';
 
-import logoImg from '../assets/images/logo.svg';
-import { Button } from '../components/Button/index';
-import { RoomCode } from '../components/RoomCode/index';
+import logoImg from '../../assets/images/logo.svg';
+import { Button } from '../../components/Button/index';
+import { RoomCode } from '../../components/RoomCode/index';
 
-import '../styles/rooms.scss';
+import './styles.scss';
 
 type FirebaseQuestions = Record<
   string,

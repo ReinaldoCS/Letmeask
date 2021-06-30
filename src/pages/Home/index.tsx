@@ -5,9 +5,9 @@ import { useAuth } from '../../hooks/useAuth';
 import { useTheme } from '../../hooks/useTheme';
 import { database } from '../../services/firebase';
 
-import ilustrationImg from '../../assets/images/illustration.svg';
-import logoImg from '../../assets/images/logo.svg';
-import logoImgDark from '../../assets/images/logo-dark.svg';
+import ilustrationImg from '../../assets/images/Illustration.svg';
+import logoImg from '../../assets/images/logoEveris.svg';
+import logoImgDark from '../../assets/images/LogoEverisDark.svg';
 import googleIconImg from '../../assets/images/google-icon.svg';
 import githubIconImg from '../../assets/images/github-icon.svg';
 
@@ -62,9 +62,11 @@ function Home() {
       </aside>
       <main>
         <div className="main-container">
-          {/* <h1>{theme}</h1> */}
-          <ToggleSwitchTheme />
           <img src={isDark ? logoImgDark : logoImg} alt="Letmeask" />
+          <div>
+            {isDark ? <span>Light mode</span> : <span>Dark mode</span>}
+            <ToggleSwitchTheme />
+          </div>
           <button
             onClick={handleCreateRoomGitHub}
             className="create-room-github"

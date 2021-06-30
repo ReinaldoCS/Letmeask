@@ -1,4 +1,4 @@
-#page-auth {
+#page-rooms {
   display: flex;
   align-items: stretch;
   height: 100vh;
@@ -6,8 +6,8 @@
   aside {
     flex: 7;
 
-    background: var(--purple);
-    color: var(--content);
+    background: var(--green);
+    color: var(--white);
 
     display: flex;
     flex-direction: column;
@@ -29,7 +29,7 @@
       font-size: 24px;
       line-height: 32px;
       margin-top: 16px;
-      color: var(--content);
+      color: var(--gray-light);
     }
   }
 
@@ -55,13 +55,25 @@
 
     > img {
       align-self: center;
+      margin-bottom: 24px;
+    }
+
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      span {
+        padding-right: 24px;
+        color: var(--border-details);
+      }
     }
 
     h2 {
       font-size: 24px;
-      margin: 64px 0 24px;
+      margin: 24px 0 ;
       font-family: 'Poppins', sans-serif;
-      color: var(--content);
+      color: var(--font-primary-color);
     }
 
     form {
@@ -70,7 +82,7 @@
         border-radius: 8px;
         padding: 0 16px;
         border: 1px solid var(--border);
-        background: var(--primary-color);
+        background: var(--background-button);
       }
 
       button {
@@ -88,7 +100,7 @@
       margin-top: 16px;
 
       a {
-        color: var(--purple);
+        color: var(--green);
       }
     }
   }

@@ -3,18 +3,22 @@ import { useState, FormEvent } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import { useAuth } from '../../hooks/useAuth';
+import { useTheme } from '../../hooks/useTheme';
+import { database } from '../../services/firebase';
 
-import ilustrationImg from '../../assets/images/illustration.svg';
-import logoImg from '../../assets/images/logo.svg';
+import ilustrationImg from '../../assets/images/Illustration.svg';
+import logoImg from '../../assets/images/logoEveris.svg';
+import logoImgDark from '../../assets/images/LogoEverisDark.svg';
 
 import { Button } from '../../components/Button/index';
-import { database } from '../../services/firebase';
+import { ToggleSwitchTheme } from '../../components/ToggleSwitchTheme/index';
 
 import './styles.scss';
 
 function NewRoom() {
   const history = useHistory();
   const { user } = useAuth();
+  const { isDark } = useTheme();
 
   const [newRoom, setNewRoom] = useState('');
 
@@ -36,7 +40,7 @@ function NewRoom() {
   }
 
   return (
-    <div id="page-auth">
+    <div id="page-rooms">
       <aside>
         <img
           src={ilustrationImg}
@@ -47,8 +51,12 @@ function NewRoom() {
       </aside>
       <main>
         <div className="main-container">
-          <img src={logoImg} alt="Letmeask" />
-          <h2>Criar uma nova sala 🌚</h2>
+          <img src={isDark ? logoImgDark : logoImg} alt="Letmeask" />
+          <div>
+            {isDark ? <span>Light mode</span> : <span>Dark mode</span>}
+            <ToggleSwitchTheme />
+          </div>
+          <h2>Criar uma nova sala</h2>
 
           <form onSubmit={handleCreateRoom}>
             <input
