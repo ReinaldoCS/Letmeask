@@ -2,7 +2,7 @@ import { useState, FormEvent } from 'react';
 import { useParams } from 'react-router-dom';
 import { BiLike } from 'react-icons/bi';
 
-import { Toaster, toast } from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 import { useAuth } from '../../hooks/useAuth';
 import { useRoom } from '../../hooks/useRoom';
 import { database } from '../../services/firebase';
@@ -51,7 +51,7 @@ function Room() {
 
     setNewQuestion('');
 
-    toast.success('Send question success');
+    toast.success('Enviado com sucesso');
   }
 
   async function handleLikeQuestion(
@@ -77,11 +77,6 @@ function Room() {
           <RoomCode code={roomId} />
         </div>
       </header>
-
-      <div>
-        <Toaster position="top-right" reverseOrder={false} />
-      </div>
-
       <main>
         <div className="room-title">
           <div className="title">
@@ -110,7 +105,9 @@ function Room() {
                 Para enviar uma pergunta, <button>faça seu login</button>.
               </span>
             )}
-            <Button disabled={!user}>Enviar pergunta</Button>
+            <Button disabled={!user || newQuestion.trim() === ''}>
+              Enviar pergunta
+            </Button>
           </div>
         </form>
         <div className="questions-list">

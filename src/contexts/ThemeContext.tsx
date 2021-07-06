@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useState, useEffect } from 'react';
-import { toast } from 'react-hot-toast';
+import { toast, Toaster } from 'react-hot-toast';
 
 type Theme = 'light' | 'dark';
 
@@ -34,8 +34,8 @@ export function ThemeContextProvider(props: ThemeContextProviderProps) {
       icon: `${!isDark ? '🌚' : '🌞'}`,
       style: {
         borderRadius: '10px',
-        background: `${!isDark ? '#333' : '#FFF'}`,
-        color: `${!isDark ? '#fff' : '#333'}`,
+        background: `${!isDark ? '#121212' : '#FFF'}`,
+        color: `${!isDark ? '#fff' : '#121212'}`,
       },
     });
   }
@@ -56,6 +56,31 @@ export function ThemeContextProvider(props: ThemeContextProviderProps) {
 
   return (
     <ThemeContext.Provider value={{ theme: currentTheme, isDark, toggleTheme }}>
+      {isDark ? (
+        <Toaster
+          position="top-right"
+          reverseOrder={false}
+          toastOptions={{
+            className: '',
+            style: {
+              background: '#121212',
+              color: '#fff',
+            },
+          }}
+        />
+      ) : (
+        <Toaster
+          position="top-right"
+          reverseOrder={false}
+          toastOptions={{
+            className: '',
+            style: {
+              background: '#fff',
+              color: '#121212',
+            },
+          }}
+        />
+      )}
       {/* <ThemeContext.Provider value={{ isDark, toggleTheme }}> */}
       {props.children}
     </ThemeContext.Provider>

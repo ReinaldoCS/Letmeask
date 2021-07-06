@@ -1,5 +1,6 @@
 import { FormEvent, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 
 import { useAuth } from '../../hooks/useAuth';
 import { useTheme } from '../../hooks/useTheme';
@@ -44,12 +45,13 @@ function Home() {
     const roomRef = await database.ref(`rooms/${roomCode}`).get();
 
     if (!roomRef.exists()) {
-      alert('Room does not exists.'); // Melhora: tirar alert e montrar erro no input
+      toast.error('Código inválido / Sala não existe'); // Melhora: tirar alert e montrar erro no input
       return;
     }
 
     if (roomRef.val().endedAt) {
-      alert('Room already closed');
+      toast.error('Sala já esta fechada');
+      return;
     }
     history.push(`/rooms/${roomCode}`);
   }
