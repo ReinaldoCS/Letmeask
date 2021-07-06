@@ -8,12 +8,15 @@ import { useRoom } from '../../hooks/useRoom';
 import { database } from '../../services/firebase';
 
 import logoImg from '../../assets/images/logo-light.svg';
+import logoImgDark from '../../assets/images/logo-dark.svg';
+
 import { Button } from '../../components/Button';
 import { ToggleSwitchTheme } from '../../components/ToggleSwitchTheme';
 import { RoomCode } from '../../components/RoomCode';
 import { Question } from '../../components/Question';
 
 import './styles.scss';
+import { useTheme } from '../../hooks/useTheme';
 
 interface RoomProps {
   id: string;
@@ -21,6 +24,7 @@ interface RoomProps {
 
 function Room() {
   const { user } = useAuth();
+  const { isDark } = useTheme();
   const params = useParams<RoomProps>();
   const roomId = params.id;
   const { title, questions } = useRoom(roomId);
@@ -73,7 +77,7 @@ function Room() {
     <div id="page-room">
       <header>
         <div className="content">
-          <img src={logoImg} alt="Letmeask" />
+          <img src={isDark ? logoImgDark : logoImg} alt="Letmeask" />
           <RoomCode code={roomId} />
         </div>
       </header>

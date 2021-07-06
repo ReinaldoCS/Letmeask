@@ -2,9 +2,12 @@ import { useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 
 import { useRoom } from '../../hooks/useRoom';
+import { useTheme } from '../../hooks/useTheme';
+
 import { database } from '../../services/firebase';
 
 import logoImg from '../../assets/images/logo-light.svg';
+import logoImgDark from '../../assets/images/logo-dark.svg';
 import deleteImg from '../../assets/images/delete.svg';
 
 import { ToggleSwitchTheme } from '../../components/ToggleSwitchTheme';
@@ -24,6 +27,7 @@ function AdminRoom() {
   const params = useParams<RoomProps>();
   const roomId = params.id;
   const history = useHistory();
+  const { isDark } = useTheme();
   const { title, questions } = useRoom(roomId);
   const [modalEndRoom, setModalEndRoom] = useState(false);
 
@@ -36,8 +40,9 @@ function AdminRoom() {
   }
 
   async function handleDeleteQuestion(questionId: string) {
-    window.confirm('Tem certeza que você deseja excluir esta pergunta?');
-    await database.ref(`rooms/${roomId}/questions/${questionId}`).remove();
+    if (window.confirm('Tem certeza que você deseja excluir esta pergunta?')) {
+      await database.ref(`rooms/${roomId}/questions/${questionId}`).remove();
+    }
   }
 
   async function handleEndRoom() {
@@ -65,7 +70,7 @@ function AdminRoom() {
       </ModalQuestion>
       <header>
         <div className="content">
-          <img src={logoImg} alt="Letmeask" />
+          <img src={isDark ? logoImgDark : logoImg} alt="Letmeask" />
           <div>
             <RoomCode code={roomId} />
             <Button onClick={openModalEndRoom} isOutlined>

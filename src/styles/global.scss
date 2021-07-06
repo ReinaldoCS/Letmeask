@@ -23,7 +23,7 @@
   --border: #737380;
   --text-highlight: #000;
   --input-color: #FFF;
-  --gray-light: #DBDCDD;
+  --gray-light: #505050;
 
   --danger: #8a0e24;
   --border-details: #a8a8b3;
@@ -40,8 +40,8 @@
 }
 
 body {
-  background: #f8f8f8;
-  color: #29292e;
+  background: var(--background-primary);
+  color: var(--text-primary);
 }
 
 body, input, button, textarea {
