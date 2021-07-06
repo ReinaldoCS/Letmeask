@@ -3,7 +3,7 @@
   border-radius: 8px;
   font-weight: 500;
   background: var(--button-color);
-  color: var(--white);
+  color: #FFF;
   padding: 0 32px;
 
   display: flex;
@@ -16,6 +16,12 @@
 
   >img {
     margin-right: 8px;
+  }
+
+  &.outlined {
+    background-color: var(--background-primary);
+    border: 1px solid var(--green);
+    color: var(--green);
   }
 
   &:not(:disabled):hover {

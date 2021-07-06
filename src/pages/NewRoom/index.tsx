@@ -6,9 +6,9 @@ import { useAuth } from '../../hooks/useAuth';
 import { useTheme } from '../../hooks/useTheme';
 import { database } from '../../services/firebase';
 
-import ilustrationImg from '../../assets/images/Illustration.svg';
-import logoImg from '../../assets/images/logoEveris.svg';
-import logoImgDark from '../../assets/images/LogoEverisDark.svg';
+import boosterImg from '../../assets/images/booster.png';
+import logoImg from '../../assets/images/logo-light.svg';
+import logoImgDark from '../../assets/images/logo-dark.svg';
 
 import { Button } from '../../components/Button/index';
 import { ToggleSwitchTheme } from '../../components/ToggleSwitchTheme/index';
@@ -42,12 +42,9 @@ function NewRoom() {
   return (
     <div id="page-rooms">
       <aside>
-        <img
-          src={ilustrationImg}
-          alt="ilustração simbolizando perguntas e respostas"
-        />
-        <strong>Toda pergunta tem uma resposta.</strong>
-        <p>Tire as dúvidas de sua audiência em tempo-real</p>
+        <img src={boosterImg} alt="ilustração simbolizando evolução" />
+        <strong>Juntos podemos ir ainda mais longe!</strong>
+        <p>Aprenda e compartilhe conhecimento com outras pessoas</p>
       </aside>
       <main>
         <div className="main-container">
@@ -69,7 +66,8 @@ function NewRoom() {
           </form>
 
           <p>
-            Quer entrar em uma sala existente <Link to="/">clique aqui</Link>
+            Quer entrar em uma sala já existente?{' '}
+            <Link to="/">Clique aqui</Link>
           </p>
         </div>
       </main>

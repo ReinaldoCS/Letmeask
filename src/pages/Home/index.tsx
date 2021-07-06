@@ -5,9 +5,9 @@ import { useAuth } from '../../hooks/useAuth';
 import { useTheme } from '../../hooks/useTheme';
 import { database } from '../../services/firebase';
 
-import ilustrationImg from '../../assets/images/Illustration.svg';
-import logoImg from '../../assets/images/logoEveris.svg';
-import logoImgDark from '../../assets/images/LogoEverisDark.svg';
+import boosterImg from '../../assets/images/booster.png';
+import logoImg from '../../assets/images/logo-light.svg';
+import logoImgDark from '../../assets/images/logo-dark.svg';
 import googleIconImg from '../../assets/images/google-icon.svg';
 import githubIconImg from '../../assets/images/github-icon.svg';
 
@@ -44,8 +44,12 @@ function Home() {
     const roomRef = await database.ref(`rooms/${roomCode}`).get();
 
     if (!roomRef.exists()) {
-      // alert('Room does not exists.'); // Melhora: tirar alert e montrar erro no input
+      alert('Room does not exists.'); // Melhora: tirar alert e montrar erro no input
       return;
+    }
+
+    if (roomRef.val().endedAt) {
+      alert('Room already closed');
     }
     history.push(`/rooms/${roomCode}`);
   }
@@ -53,12 +57,9 @@ function Home() {
   return (
     <div id="page-auth">
       <aside>
-        <img
-          src={ilustrationImg}
-          alt="ilustração simbolizando perguntas e respostas"
-        />
-        <strong>Toda pergunta tem uma resposta.</strong>
-        <p>Tire as dúvidas de sua audiência em tempo-real</p>
+        <img src={boosterImg} alt="ilustração simbolizando evolução" />
+        <strong>Juntos podemos ir ainda mais longe!</strong>
+        <p>Aprenda e compartilhe conhecimento com outras pessoas</p>
       </aside>
       <main>
         <div className="main-container">

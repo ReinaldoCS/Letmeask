@@ -7,16 +7,18 @@
     flex: 7;
 
     background: var(--green);
-    color: var(--white);
+    color: var(--text-highlight);
 
     display: flex;
     flex-direction: column;
     justify-content: center;
 
-    padding: 120px 80px;
+    padding: 0px 80px 80px;
 
     img {
-      max-width: 320px;
+      // max-width: 320px;
+      width: 440px;
+      height: auto;
     }
 
     strong {
@@ -29,7 +31,7 @@
       font-size: 24px;
       line-height: 32px;
       margin-top: 16px;
-      color: var(--gray-light);
+      color: var(--background-primary);
     }
   }
 
@@ -42,7 +44,7 @@
     align-items: center;
     justify-content: center;
 
-    background: var(--background);
+    background: var(--background-primary);
   }
 
   .main-container {
@@ -65,7 +67,7 @@
 
       span {
         padding-right: 24px;
-        color: var(--border-details);
+        color: var(--text-second);
       }
     }
 
@@ -73,7 +75,7 @@
       font-size: 24px;
       margin: 24px 0 ;
       font-family: 'Poppins', sans-serif;
-      color: var(--font-primary-color);
+      color: var(--text-primary);
     }
 
     form {
@@ -82,7 +84,8 @@
         border-radius: 8px;
         padding: 0 16px;
         border: 1px solid var(--border);
-        background: var(--background-button);
+        color: var(--input-color);
+        background: var(--background-second);
       }
 
       button {
@@ -96,11 +99,11 @@
 
     p {
       font-size: 14px;
-      color: var(--gray);
+      color: var(--text-second);
       margin-top: 16px;
 
       a {
-        color: var(--green);
+        color: #FFB700;
       }
     }
   }

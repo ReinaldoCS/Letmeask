@@ -1,65 +1,36 @@
 :root{
-  --green: #9AAE04;
-  --button-color: #327A6D;
-  --font-primary-color: #29292E;
-  --font-second-color: #737380;
-  --background: #F8F8F8;
-  --white: #FFF;
-  --background-button: #FFF;
+  --green: #00BAA5;
+  --button-color: #007C6E;
+  --text-primary: #2A2A2A;
+  --text-second: #A8A8B3;
+  --border: #A8A8B3;
+  --text-highlight: #FFF;
+  --input-color: #000;
   --gray-light: #DBDCDD;
 
-  --content: #f8f8f8;
-  --gray: #737380;
-  --pink: #E559F9;
   --danger: #E73F5D;
   --border-details: #a8a8b3;
-
-
-
-
-  --text: #29292E;
-
-  --border: #e2e2e2;
-
-  --primary-color: #fff;
-  --secondary-color: #000;
-
-  --overlay: #050206CC;
-  --background-modal: #fff;
-
-  --background-container: #fefefe;
-  --background-question-highlighted: #F4F0FF;
-  --background-question-answered: #DBDCDD;
+  --background-primary: #F8F8F8;
+  --background-second: #FFF;
+  --background-question: #FEFEFE;
 }
 
 :root.dark {
-  --green: #809004;
-
-  --background: #0C0E00;
-
-  --background-button: #090a00;
-
-
-  --text: #f8f8f8;
-  --content: #B8B8B8;
-  --gray: #737380;
+  --green: #007C6E;
+  --button-color: #004646;
+  --text-primary: #F8F8F8;
+  --text-second: #737380;
+  --border: #737380;
+  --text-highlight: #000;
+  --input-color: #FFF;
   --gray-light: #DBDCDD;
-  --pink: #aa1bec;
-  --red: #8a0e24;
-  --white: #fff;
 
-  --border: #575454;
-  --border-details: #555555;
+  --danger: #8a0e24;
+  --border-details: #a8a8b3;
+  --background-primary: #2A2A2A;
+  --background-second: #1F1F1F;
+  --background-question: #1F1F1F;
 
-  --primary-color: #000;
-  --secondary-color: #fff;
-
-  --overlay: #050206CC;
-  --background-modal: #000;
-
-  --background-container: #131213;
-  --background-question-highlighted: #222454;
-  --background-question-answered: #222333;
 }
 
 * {

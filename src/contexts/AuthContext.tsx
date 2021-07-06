@@ -48,6 +48,8 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
 
     const result = await auth.signInWithPopup(provider);
 
+    console.log(result);
+
     if (result.user) {
       const { displayName, photoURL, uid } = result.user;
 
@@ -69,6 +71,7 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
 
     console.log(result);
   }
+
   return (
     <AuthContext.Provider value={{ user, signInWithGoogle, signInWithGithub }}>
       {props.children}

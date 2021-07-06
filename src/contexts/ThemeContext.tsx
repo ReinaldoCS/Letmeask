@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useState, useEffect } from 'react';
+import { toast } from 'react-hot-toast';
 
 type Theme = 'light' | 'dark';
 
@@ -28,6 +29,15 @@ export function ThemeContextProvider(props: ThemeContextProviderProps) {
     document.documentElement.className = newMode ? `dark` : ``;
     setIsDark(!isDark);
     localStorage.setItem(`theme`, newMode ? `dark` : `light`);
+
+    toast(`Bem vindo ao ${!isDark ? 'dark' : 'light'} mod!`, {
+      icon: `${!isDark ? '🌚' : '🌞'}`,
+      style: {
+        borderRadius: '10px',
+        background: `${!isDark ? '#333' : '#FFF'}`,
+        color: `${!isDark ? '#fff' : '#333'}`,
+      },
+    });
   }
 
   useEffect(() => {

@@ -1,39 +1,19 @@
-import { useState, useEffect, FormEvent } from 'react';
+import { useState, FormEvent } from 'react';
 import { useParams } from 'react-router-dom';
+import { BiLike } from 'react-icons/bi';
 
 import { Toaster, toast } from 'react-hot-toast';
 import { useAuth } from '../../hooks/useAuth';
+import { useRoom } from '../../hooks/useRoom';
 import { database } from '../../services/firebase';
 
-import logoImg from '../../assets/images/logo.svg';
-import { Button } from '../../components/Button/index';
-import { RoomCode } from '../../components/RoomCode/index';
+import logoImg from '../../assets/images/logo-light.svg';
+import { Button } from '../../components/Button';
+import { ToggleSwitchTheme } from '../../components/ToggleSwitchTheme';
+import { RoomCode } from '../../components/RoomCode';
+import { Question } from '../../components/Question';
 
 import './styles.scss';
-
-type FirebaseQuestions = Record<
-  string,
-  {
-    author: {
-      name: string;
-      avatar: string;
-    };
-    content: string;
-    isHighlighted: boolean;
-    isAnswered: boolean;
-  }
->;
-
-interface Question {
-  id: string;
-  author: {
-    name: string;
-    avatar: string;
-  };
-  content: string;
-  isHighlighted: boolean;
-  isAnswered: boolean;
-}
 
 interface RoomProps {
   id: string;
@@ -43,34 +23,8 @@ function Room() {
   const { user } = useAuth();
   const params = useParams<RoomProps>();
   const roomId = params.id;
-
+  const { title, questions } = useRoom(roomId);
   const [newQuestion, setNewQuestion] = useState('');
-  const [questions, setQuestions] = useState<Question[]>([]);
-  const [title, setTitle] = useState('');
-
-  useEffect(() => {
-    const roomRef = database.ref(`rooms/${roomId}`);
-
-    roomRef.on('value', room => {
-      const databaseRoom = room.val();
-      const firebaseQuestions: FirebaseQuestions = databaseRoom.questions ?? {};
-
-      const parsedQuestions = Object.entries(firebaseQuestions).map(
-        ([key, value]) => {
-          return {
-            id: key,
-            content: value.content,
-            author: value.author,
-            isHighlighted: value.isHighlighted,
-            isAnswered: value.isAnswered,
-          };
-        },
-      );
-
-      setTitle(databaseRoom.title);
-      setQuestions(parsedQuestions);
-    });
-  }, [roomId]);
 
   async function handleSendNewQuestion(event: FormEvent) {
     event.preventDefault();
@@ -100,6 +54,21 @@ function Room() {
     toast.success('Send question success');
   }
 
+  async function handleLikeQuestion(
+    questionId: string,
+    likedId: string | undefined,
+  ) {
+    if (likedId) {
+      await database
+        .ref(`rooms/${roomId}/questions/${questionId}/likes/${likedId}`)
+        .remove();
+    } else {
+      await database.ref(`rooms/${roomId}/questions/${questionId}/likes`).push({
+        authorId: user?.id,
+      });
+    }
+  }
+
   return (
     <div id="page-room">
       <header>
@@ -115,8 +84,13 @@ function Room() {
 
       <main>
         <div className="room-title">
-          <h1>Sala {title}</h1>
-          {questions.length > 0 && <span>{questions.length} pergunta(s)</span>}
+          <div className="title">
+            <h1>Sala {title}</h1>
+            {questions.length > 0 && (
+              <span>{questions.length} pergunta(s)</span>
+            )}
+          </div>
+          <ToggleSwitchTheme />
         </div>
 
         <form onSubmit={handleSendNewQuestion}>
@@ -139,8 +113,27 @@ function Room() {
             <Button disabled={!user}>Enviar pergunta</Button>
           </div>
         </form>
-
-        {JSON.stringify(questions)}
+        <div className="questions-list">
+          {questions.map(question => (
+            <Question
+              key={question.id} // algoritmo de reconciliação
+              content={question.content}
+              author={question.author}
+            >
+              <button
+                onClick={() =>
+                  handleLikeQuestion(question.id, question.likedId)
+                }
+                className={`like-button ${question.likedId ? 'liked' : ''}`}
+                type="button"
+                aria-label="marcar como gostei"
+              >
+                {question.likeCount > 0 && <span>{question.likeCount}</span>}
+                <BiLike size="24" />
+              </button>
+            </Question>
+          ))}
+        </div>
       </main>
     </div>
   );
