@@ -82,7 +82,7 @@
 
           span {
             margin-left: 8px;
-            color: #29292e;
+            color: var(--text-primary);
             font-weight: 500;
             font-size: 14px;
           }
@@ -90,13 +90,13 @@
 
         > span {
           font-size: 14px;
-          color: #737380;
+          color: var(--text-second);
           font-weight: 500;
 
           button {
             background: none;
             border: none;
-            color: #835AFD;
+            color: var(--green);
             text-decoration: underline;
             font-size: 14px;
           }

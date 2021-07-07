@@ -1,5 +1,5 @@
 import { useState, FormEvent } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { BiLike } from 'react-icons/bi';
 
 import { toast } from 'react-hot-toast';
@@ -25,6 +25,7 @@ interface RoomProps {
 function Room() {
   const { user } = useAuth();
   const { isDark } = useTheme();
+  const history = useHistory();
   const params = useParams<RoomProps>();
   const roomId = params.id;
   const { title, questions } = useRoom(roomId);
@@ -106,7 +107,11 @@ function Room() {
               </div>
             ) : (
               <span>
-                Para enviar uma pergunta, <button>faça seu login</button>.
+                Para enviar uma pergunta,{' '}
+                <button onClick={() => history.push('/')}>
+                  faça seu login
+                </button>
+                .
               </span>
             )}
             <Button disabled={!user || newQuestion.trim() === ''}>

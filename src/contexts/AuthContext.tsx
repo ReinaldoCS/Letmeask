@@ -10,7 +10,6 @@ interface User {
 interface AuthContextType {
   user: User | undefined;
   signInWithGoogle: () => Promise<void>;
-  signInWithGithub: () => Promise<void>;
 }
 
 type AuthContextProviderProps = {
@@ -48,8 +47,6 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
 
     const result = await auth.signInWithPopup(provider);
 
-    console.log(result);
-
     if (result.user) {
       const { displayName, photoURL, uid } = result.user;
 
@@ -64,16 +61,8 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
     }
   }
 
-  async function signInWithGithub() {
-    const provider = new firebase.auth.GithubAuthProvider();
-
-    const result = await auth.signInWithPopup(provider);
-
-    console.log(result);
-  }
-
   return (
-    <AuthContext.Provider value={{ user, signInWithGoogle, signInWithGithub }}>
+    <AuthContext.Provider value={{ user, signInWithGoogle }}>
       {props.children}
     </AuthContext.Provider>
   );

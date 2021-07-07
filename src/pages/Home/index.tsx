@@ -10,7 +10,6 @@ import boosterImg from '../../assets/images/booster.png';
 import logoImg from '../../assets/images/logo-light.svg';
 import logoImgDark from '../../assets/images/logo-dark.svg';
 import googleIconImg from '../../assets/images/google-icon.svg';
-import githubIconImg from '../../assets/images/github-icon.svg';
 
 import { Button } from '../../components/Button/index';
 import { ToggleSwitchTheme } from '../../components/ToggleSwitchTheme/index';
@@ -19,7 +18,7 @@ import './styles.scss';
 
 function Home() {
   const history = useHistory();
-  const { user, signInWithGoogle, signInWithGithub } = useAuth();
+  const { user, signInWithGoogle } = useAuth();
   const { isDark } = useTheme();
   const [roomCode, setRoomCode] = useState('');
 
@@ -29,10 +28,6 @@ function Home() {
     }
 
     history.push('/rooms/new');
-  }
-
-  async function handleCreateRoomGitHub() {
-    await signInWithGithub();
   }
 
   async function handlejoinRoom(event: FormEvent) {
@@ -70,13 +65,6 @@ function Home() {
             {isDark ? <span>Light mode</span> : <span>Dark mode</span>}
             <ToggleSwitchTheme />
           </div>
-          <button
-            onClick={handleCreateRoomGitHub}
-            className="create-room-github"
-          >
-            <img src={githubIconImg} alt="Logo do Google" />
-            Crie sua sala com o GitHub
-          </button>
           <button onClick={handleCreateRoom} className="create-room-google">
             <img src={googleIconImg} alt="Logo do Google" />
             Crie sua sala com o Google
