@@ -38,6 +38,14 @@ type FirebaseQuestions = Record<
 export function useRoom(roomId: string) {
   const { user } = useAuth();
   const [questions, setQuestions] = useState<QuestionType[]>([]);
+  const [questionsHighlight, setQuestionsHighlight] = useState<QuestionType[]>(
+    [],
+  );
+  const [questionsAnswered, setQuestionsAnswered] = useState<QuestionType[]>(
+    [],
+  );
+  const [onlyQuestions, setOnlyQuestions] = useState<QuestionType[]>([]);
+
   const [title, setTitle] = useState('');
 
   useEffect(() => {
@@ -99,8 +107,23 @@ export function useRoom(roomId: string) {
         },
       );
 
+      const orderOnlyQuestionHighlight = orderQuestionsByHighlight.filter(
+        quest => quest.isHighlighted === true,
+      );
+
+      const orderOnlyQuestionAnswered = orderQuestionsByHighlight.filter(
+        quest => quest.isAnswered === true,
+      );
+
+      const orderOnlyQuestions = orderQuestionsByHighlight.filter(
+        quest => quest.isAnswered === false && quest.isHighlighted === false,
+      );
+
       setTitle(databaseRoom.title);
       setQuestions(orderQuestionsByHighlight);
+      setQuestionsHighlight(orderOnlyQuestionHighlight);
+      setQuestionsAnswered(orderOnlyQuestionAnswered);
+      setOnlyQuestions(orderOnlyQuestions);
     });
 
     return () => {
@@ -108,5 +131,11 @@ export function useRoom(roomId: string) {
     };
   }, [roomId, user?.id]);
 
-  return { questions, title };
+  return {
+    questions,
+    title,
+    questionsHighlight,
+    questionsAnswered,
+    onlyQuestions,
+  };
 }

@@ -104,6 +104,31 @@
       }
     }
 
+    .separetor {
+      font-size: 14px;
+      color: var(--border);
+  
+      margin: 32px 0;
+      display: flex;
+      align-items: center;
+  
+      &::before {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+        margin-right: 16px;
+      }
+  
+      &::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+        margin-left: 16px;
+      }
+    }
+
     .questions-list {
       margin-top: 32px;
     }

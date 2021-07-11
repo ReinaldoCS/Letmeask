@@ -9,6 +9,7 @@ import { useTheme } from '../../hooks/useTheme';
 import { database } from '../../services/firebase';
 
 import logoImg from '../../assets/images/logo-light.svg';
+import nothingImg from '../../assets/images/nothing.png';
 import logoImgDark from '../../assets/images/logo-dark.svg';
 
 import { Button } from '../../components/Button';
@@ -28,7 +29,13 @@ function Room() {
   const history = useHistory();
   const params = useParams<RoomProps>();
   const roomId = params.id;
-  const { title, questions } = useRoom(roomId);
+  const {
+    title,
+    questions,
+    onlyQuestions,
+    questionsAnswered,
+    questionsHighlight,
+  } = useRoom(roomId);
   const [newQuestion, setNewQuestion] = useState('');
 
   async function handleSendNewQuestion(event: FormEvent) {
@@ -119,29 +126,92 @@ function Room() {
             </Button>
           </div>
         </form>
-        <div className="questions-list">
-          {questions.map(question => (
-            <Question
-              key={question.id} // algoritmo de reconciliação
-              content={question.content}
-              author={question.author}
-              isAnswered={question.isAnswered}
-              isHighlighted={question.isHighlighted}
-            >
-              <button
-                onClick={() =>
-                  handleLikeQuestion(question.id, question.likedId)
-                }
-                className={`like-button ${question.likedId ? 'liked' : ''}`}
-                type="button"
-                aria-label="marcar como gostei"
-              >
-                {question.likeCount > 0 && <span>{question.likeCount}</span>}
-                <BiLike size="24" />
-              </button>
-            </Question>
-          ))}
-        </div>
+        {questions.length > 0 ? (
+          <>
+            <div className="questions-list">
+              {questionsHighlight.map(question => (
+                <Question
+                  key={question.id} // algoritmo de reconciliação
+                  content={question.content}
+                  author={question.author}
+                  isAnswered={question.isAnswered}
+                  isHighlighted={question.isHighlighted}
+                >
+                  <button
+                    onClick={() =>
+                      handleLikeQuestion(question.id, question.likedId)
+                    }
+                    className={`like-button ${question.likedId ? 'liked' : ''}`}
+                    type="button"
+                    aria-label="marcar como gostei"
+                  >
+                    {question.likeCount > 0 && (
+                      <span>{question.likeCount}</span>
+                    )}
+                    <BiLike size="24" />
+                  </button>
+                </Question>
+              ))}
+            </div>
+
+            <div className="questions-list">
+              {onlyQuestions.map(question => (
+                <Question
+                  key={question.id} // algoritmo de reconciliação
+                  content={question.content}
+                  author={question.author}
+                  isAnswered={question.isAnswered}
+                  isHighlighted={question.isHighlighted}
+                >
+                  <button
+                    onClick={() =>
+                      handleLikeQuestion(question.id, question.likedId)
+                    }
+                    className={`like-button ${question.likedId ? 'liked' : ''}`}
+                    type="button"
+                    aria-label="marcar como gostei"
+                  >
+                    {question.likeCount > 0 && (
+                      <span>{question.likeCount}</span>
+                    )}
+                    <BiLike size="24" />
+                  </button>
+                </Question>
+              ))}
+            </div>
+
+            <div className="questions-list">
+              {questionsAnswered.map(question => (
+                <Question
+                  key={question.id} // algoritmo de reconciliação
+                  content={question.content}
+                  author={question.author}
+                  isAnswered={question.isAnswered}
+                  isHighlighted={question.isHighlighted}
+                >
+                  <button
+                    className={`like-button ${question.likedId ? 'liked' : ''}`}
+                    type="button"
+                    aria-label="marcar como gostei"
+                  >
+                    {question.likeCount > 0 && (
+                      <span>{question.likeCount}</span>
+                    )}
+                    <BiLike size="24" />
+                  </button>
+                </Question>
+              ))}
+            </div>
+          </>
+        ) : (
+          <div className="nothing-found">
+            <h2>Nenhuma pergunta por aqui...</h2>
+            <img src={nothingImg} alt="Nenhuma pergunta encontrada" />
+            <span>
+              Faça o seu login e seja a primeira pessoa a fazer uma pergunta!
+            </span>
+          </div>
+        )}
       </main>
     </div>
   );

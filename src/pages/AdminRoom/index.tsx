@@ -13,6 +13,7 @@ import { database } from '../../services/firebase';
 
 import logoImg from '../../assets/images/logo-light.svg';
 import excludeImg from '../../assets/images/exclude.svg';
+import nothingImg from '../../assets/images/nothing.png';
 import disabledImg from '../../assets/images/disabled.svg';
 import logoImgDark from '../../assets/images/logo-dark.svg';
 import excludeImgDark from '../../assets/images/excludeDark.svg';
@@ -35,7 +36,13 @@ function AdminRoom() {
   const roomId = params.id;
   const history = useHistory();
   const { isDark } = useTheme();
-  const { title, questions } = useRoom(roomId);
+  const {
+    title,
+    questions,
+    questionsHighlight,
+    questionsAnswered,
+    onlyQuestions,
+  } = useRoom(roomId);
 
   const {
     isModalDelete,
@@ -106,20 +113,22 @@ function AdminRoom() {
           </div>
           <ToggleSwitchTheme />
         </div>
-
-        <div className="questions-list">
-          {questions.length > 0 &&
-            questions.map(quest => {
-              return (
-                <Question
-                  key={quest.id}
-                  author={quest.author}
-                  content={quest.content}
-                  isAnswered={quest.isAnswered}
-                  isHighlighted={quest.isHighlighted}
-                >
-                  {!quest.isAnswered ? (
-                    <>
+        {questions.length > 0 ? (
+          <>
+            <div className="questions-list">
+              {questionsHighlight.length > 0 && (
+                <div className="separetor">Respondendo</div>
+              )}
+              {questionsHighlight.length > 0 &&
+                questionsHighlight.map(quest => {
+                  return (
+                    <Question
+                      key={quest.id}
+                      author={quest.author}
+                      content={quest.content}
+                      isAnswered={quest.isAnswered}
+                      isHighlighted={quest.isHighlighted}
+                    >
                       <button
                         type="button"
                         onClick={() => handleQuestionAsAnswered(quest.id)}
@@ -139,7 +148,7 @@ function AdminRoom() {
                         <AiOutlineComment
                           size="24px"
                           className="highlighted-icon"
-                          title="Marcar como próximo asunto"
+                          title="Marcar como próximo assunto"
                         />
                       </button>
                       <button
@@ -159,9 +168,83 @@ function AdminRoom() {
                           handleDeleteQuestion({ roomId, questionId: quest.id })
                         }
                       />
-                    </>
-                  ) : (
-                    <>
+                    </Question>
+                  );
+                })}
+            </div>
+
+            <div className="questions-list">
+              {onlyQuestions.length > 0 && (
+                <div className="separetor">Não respondidas</div>
+              )}
+              {onlyQuestions.length > 0 &&
+                onlyQuestions.map(quest => {
+                  return (
+                    <Question
+                      key={quest.id}
+                      author={quest.author}
+                      content={quest.content}
+                      isAnswered={quest.isAnswered}
+                      isHighlighted={quest.isHighlighted}
+                    >
+                      <button
+                        type="button"
+                        onClick={() => handleQuestionAsAnswered(quest.id)}
+                      >
+                        <AiOutlineCheckCircle
+                          size="24px"
+                          className="answered-icon"
+                          title="Marcar duvida como respondida"
+                        />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          handleHighlightQuestion(quest.id, quest.isHighlighted)
+                        }
+                      >
+                        <AiOutlineComment
+                          size="24px"
+                          className="highlighted-icon"
+                          title="Marcar como próximo assunto"
+                        />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => toggleDeleteModal({ code: quest.id })}
+                      >
+                        <AiOutlineDelete size="24px" title="Remover pergunta" />
+                      </button>
+                      <ConfirmDialog
+                        image={isDark ? excludeImgDark : excludeImg}
+                        isShown={isModalDelete}
+                        hide={() => toggleDeleteModal({})}
+                        title="Excluir pergunta"
+                        message="Tem certeza que você deseja excluir esta pergunta?"
+                        textButtonConfirm="Sim, excluir"
+                        onConfirm={() =>
+                          handleDeleteQuestion({ roomId, questionId: quest.id })
+                        }
+                      />
+                    </Question>
+                  );
+                })}
+            </div>
+
+            <div className="questions-list">
+              {questionsAnswered.length > 0 && (
+                <div className="separetor">Respondidas</div>
+              )}
+              {questionsAnswered.length > 0 &&
+                questionsAnswered.map(quest => {
+                  return (
+                    <Question
+                      key={quest.id}
+                      author={quest.author}
+                      content={quest.content}
+                      isAnswered={quest.isAnswered}
+                      isHighlighted={quest.isHighlighted}
+                    >
                       <button
                         type="button"
                         onClick={() => handleQuestionAsAnswered(quest.id)}
@@ -189,12 +272,21 @@ function AdminRoom() {
                           handleDeleteQuestion({ roomId, questionId: quest.id })
                         }
                       />
-                    </>
-                  )}
-                </Question>
-              );
-            })}
-        </div>
+                    </Question>
+                  );
+                })}
+            </div>
+          </>
+        ) : (
+          <div className="nothing-found">
+            <h2>Nenhuma pergunta por aqui...</h2>
+            <img src={nothingImg} alt="Nenhuma pergunta encontrada" />
+            <span>
+              Envie o código desta sala para seus amigos e comece a responder
+              perguntas!
+            </span>
+          </div>
+        )}
       </main>
     </div>
   );
