@@ -129,6 +129,9 @@ function Room() {
         {questions.length > 0 ? (
           <>
             <div className="questions-list">
+              {questionsHighlight.length > 0 && (
+                <div className="separetor">Respondendo</div>
+              )}
               {questionsHighlight.map(question => (
                 <Question
                   key={question.id} // algoritmo de reconciliação
@@ -155,6 +158,9 @@ function Room() {
             </div>
 
             <div className="questions-list">
+              {onlyQuestions.length > 0 && (
+                <div className="separetor">Perguntas</div>
+              )}
               {onlyQuestions.map(question => (
                 <Question
                   key={question.id} // algoritmo de reconciliação
@@ -181,6 +187,9 @@ function Room() {
             </div>
 
             <div className="questions-list">
+              {questionsAnswered.length > 0 && (
+                <div className="separetor">Respondendo</div>
+              )}
               {questionsAnswered.map(question => (
                 <Question
                   key={question.id} // algoritmo de reconciliação

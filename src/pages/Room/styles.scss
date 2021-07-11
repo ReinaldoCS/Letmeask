@@ -132,5 +132,30 @@
     .questions-list {
       margin-top: 32px;
     }
+
+    .nothing-found {
+      display: flex;
+      margin-top: 64px;
+      align-content: center;
+      justify-content: center;
+      flex-direction: column;
+  
+      h2 {
+        margin: auto;
+      }
+  
+      img {
+        width: 50%;
+        margin: auto
+  
+      }
+  
+      span {
+        margin: 8px auto 64px;
+        max-width: 400px;
+        text-align: center;
+        color: var(--text-second);
+      }
+    }
   }
 }
