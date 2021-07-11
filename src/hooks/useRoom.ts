@@ -63,8 +63,44 @@ export function useRoom(roomId: string) {
         },
       );
 
+      const orderQuestionsByLikeCount = parsedQuestions.sort(
+        (questA, questB) => {
+          if (questA.likeCount > questB.likeCount) {
+            return -1;
+          }
+          if (questA.likeCount < questB.likeCount) {
+            return 1;
+          }
+          return 0;
+        },
+      );
+
+      const orderQuestionsByNotAnswer = orderQuestionsByLikeCount.sort(
+        (questA, questB) => {
+          if (questA.isAnswered > questB.isAnswered) {
+            return 1;
+          }
+          if (questA.isAnswered < questB.isAnswered) {
+            return -1;
+          }
+          return 0;
+        },
+      );
+
+      const orderQuestionsByHighlight = orderQuestionsByNotAnswer.sort(
+        (questA, questB) => {
+          if (questA.isHighlighted > questB.isHighlighted) {
+            return -1;
+          }
+          if (questA.isHighlighted < questB.isHighlighted) {
+            return 1;
+          }
+          return 0;
+        },
+      );
+
       setTitle(databaseRoom.title);
-      setQuestions(parsedQuestions);
+      setQuestions(orderQuestionsByHighlight);
     });
 
     return () => {

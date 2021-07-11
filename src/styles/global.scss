@@ -13,6 +13,8 @@
   --background-primary: #F8F8F8;
   --background-second: #FFF;
   --background-question: #FEFEFE;
+  --question-highlighted: #ADFFF6;
+  --question-answered: #DBDCDD;
 }
 
 :root.dark {
@@ -30,6 +32,8 @@
   --background-primary: #2A2A2A;
   --background-second: #1F1F1F;
   --background-question: #1F1F1F;
+  --question-highlighted: #002824;
+  --question-answered: #141414;
 
 }
 

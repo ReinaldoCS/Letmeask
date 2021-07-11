@@ -1,22 +1,22 @@
 import { useState, FormEvent } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { BiLike } from 'react-icons/bi';
-
 import { toast } from 'react-hot-toast';
+
 import { useAuth } from '../../hooks/useAuth';
 import { useRoom } from '../../hooks/useRoom';
+import { useTheme } from '../../hooks/useTheme';
 import { database } from '../../services/firebase';
 
 import logoImg from '../../assets/images/logo-light.svg';
 import logoImgDark from '../../assets/images/logo-dark.svg';
 
 import { Button } from '../../components/Button';
-import { ToggleSwitchTheme } from '../../components/ToggleSwitchTheme';
 import { RoomCode } from '../../components/RoomCode';
 import { Question } from '../../components/Question';
+import { ToggleSwitchTheme } from '../../components/ToggleSwitchTheme';
 
 import './styles.scss';
-import { useTheme } from '../../hooks/useTheme';
 
 interface RoomProps {
   id: string;
@@ -125,6 +125,8 @@ function Room() {
               key={question.id} // algoritmo de reconciliação
               content={question.content}
               author={question.author}
+              isAnswered={question.isAnswered}
+              isHighlighted={question.isHighlighted}
             >
               <button
                 onClick={() =>

@@ -56,7 +56,6 @@
       "react/button-has-type": ["off"],
       "react/destructuring-assignment": "off",
       "import/no-duplicates": ["error", {"considerQueryString": true}],
-      "react/require-default-props": "off",
-      "import/no-duplicates": "off"
+      "react/require-default-props": "off"
     }
 }

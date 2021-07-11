@@ -8,6 +8,27 @@
     margin-top: 8px;
   }
 
+  &.highlighted {
+    background-color: var(--question-highlighted);
+    border: 1px solid var(--button-color);
+
+    .user-info span {
+      color: var(--text-primary)
+    }
+
+    .highlighted-icon {
+      color: var(--green)
+    }
+  }
+
+  &.answered {
+    background-color: var(--question-answered);
+
+    .answered-icon {
+      color: var(--green)
+    }
+  }
+
   p {
     color: var(--text-primary)
   }
@@ -22,6 +43,8 @@
       display: flex;
       align-items: center;
 
+      gap: 8px;
+
       img {
         width: 32px;
         height: 32px;
@@ -29,11 +52,16 @@
       }
 
       span {
-        margin-left: 8px;
+        margin-left: 2px;
         color: var(--text-second);
         font-weight: 500;
         font-size: 14px;
       }
+    }
+
+    > div {
+      display: flex;
+      gap: 16px;
     }
 
     button {
@@ -42,6 +70,10 @@
 
       transition: filter 0.2s;
 
+       svg {
+         color: var(--text-second);
+       }
+
       &:hover {
         filter: brightness(0.7);
       }
@@ -49,18 +81,21 @@
       &.like-button {
         display: flex;
         align-items: flex-end;
-        color: #737380
+        color: var(--text-second)
       }
 
       &.liked {
         color: var(--green);
+        svg {
+          margin-left: 8px;
+        }
       }
 
 
 
-      svg {
-        margin-left: 8px;
-      }
+      // svg {
+      //   margin-left: 16px;
+      // }
     }
   }
 }
