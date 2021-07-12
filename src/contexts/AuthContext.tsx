@@ -59,6 +59,8 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
         avatar: photoURL,
       });
     }
+
+    // window.sessionStorage.setItem('sessionUser', user.id);
   }
 
   return (

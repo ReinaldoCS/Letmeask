@@ -1,4 +1,7 @@
+import React from 'react';
 import Modal from 'react-modal';
+
+import { IconBaseProps } from 'react-icons';
 
 import { Button } from '../Button';
 
@@ -11,7 +14,7 @@ type ModalProps = {
   hide: () => void;
   textButtonConfirm: string;
   onConfirm: () => Promise<void>;
-  image: string;
+  icon: React.ComponentType<IconBaseProps>;
 };
 
 export function ConfirmDialog({
@@ -21,7 +24,7 @@ export function ConfirmDialog({
   hide,
   textButtonConfirm,
   onConfirm,
-  image,
+  icon: Icon,
 }: ModalProps) {
   const modal = (
     <Modal
@@ -37,7 +40,7 @@ export function ConfirmDialog({
       isOpen={isShown}
     >
       <div className="main-modal">
-        <img src={image} alt="Simbolo de alerta" />
+        {Icon && <Icon size="52px" />}
         <h2>{title}</h2>
         <span>{message}</span>
 

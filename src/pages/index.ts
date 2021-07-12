@@ -1,6 +1,7 @@
 import Home from './Home';
-import NewRoom from './NewRoom';
 import Room from './Room';
+import NewRoom from './NewRoom';
 import AdminRoom from './AdminRoom';
+import NotFoundPage from './NotFoundPage';
 
-export { Home, Room, NewRoom, AdminRoom };
+export { Home, Room, NewRoom, AdminRoom, NotFoundPage };

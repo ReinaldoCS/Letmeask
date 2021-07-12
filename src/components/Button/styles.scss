@@ -22,7 +22,15 @@
     background-color: var(--background-primary);
     border: 1px solid var(--green);
     color: var(--green);
+
+    transition: 0.2s;
+
+    &:hover {
+      background-color: var(--green);
+      color: var(--text-primary);
+    }
   }
+
 
   &:not(:disabled):hover {
     filter: brightness(90%);

@@ -1,6 +1,7 @@
 import { useParams, useHistory } from 'react-router-dom';
 import {
   AiOutlineCheckCircle,
+  AiOutlineCloseCircle,
   AiOutlineComment,
   AiOutlineDelete,
 } from 'react-icons/ai';
@@ -12,12 +13,12 @@ import { useModal } from '../../hooks/useModal';
 import { database } from '../../services/firebase';
 
 import logoImg from '../../assets/images/logo-light.svg';
-import excludeImg from '../../assets/images/exclude.svg';
+// import excludeImg from '../../assets/images/exclude.svg';
 import nothingImg from '../../assets/images/nothing.png';
-import disabledImg from '../../assets/images/disabled.svg';
+// import disabledImg from '../../assets/images/disabled.svg';
 import logoImgDark from '../../assets/images/logo-dark.svg';
-import excludeImgDark from '../../assets/images/excludeDark.svg';
-import disabledImgDark from '../../assets/images/disabledDark.svg';
+// import excludeImgDark from '../../assets/images/excludeDark.svg';
+// import disabledImgDark from '../../assets/images/disabledDark.svg';
 
 import { Button } from '../../components/Button';
 import { RoomCode } from '../../components/RoomCode';
@@ -54,6 +55,7 @@ function AdminRoom() {
 
   async function handleQuestionAsAnswered(questionId: string) {
     await database.ref(`rooms/${roomId}/questions/${questionId}`).update({
+      isHighlighted: false,
       isAnswered: true,
     });
   }
@@ -91,7 +93,7 @@ function AdminRoom() {
               Encerrar sala
             </Button>
             <ConfirmDialog
-              image={isDark ? disabledImgDark : disabledImg}
+              icon={AiOutlineCloseCircle}
               isShown={isModalEndRoom}
               hide={toggleModalEndRoom}
               title="Encerrar sala"
@@ -158,7 +160,8 @@ function AdminRoom() {
                         <AiOutlineDelete size="24px" title="Remover pergunta" />
                       </button>
                       <ConfirmDialog
-                        image={isDark ? excludeImgDark : excludeImg}
+                        key={quest.id}
+                        icon={AiOutlineDelete}
                         isShown={isModalDelete}
                         hide={() => toggleDeleteModal({})}
                         title="Excluir pergunta"
@@ -216,7 +219,8 @@ function AdminRoom() {
                         <AiOutlineDelete size="24px" title="Remover pergunta" />
                       </button>
                       <ConfirmDialog
-                        image={isDark ? excludeImgDark : excludeImg}
+                        key={quest.id}
+                        icon={AiOutlineDelete}
                         isShown={isModalDelete}
                         hide={() => toggleDeleteModal({})}
                         title="Excluir pergunta"
@@ -262,7 +266,8 @@ function AdminRoom() {
                         <AiOutlineDelete size="24px" title="Remover pergunta" />
                       </button>
                       <ConfirmDialog
-                        image={isDark ? excludeImgDark : excludeImg}
+                        key={quest.id}
+                        icon={AiOutlineDelete}
                         isShown={isModalDelete}
                         hide={() => toggleDeleteModal({})}
                         title="Excluir pergunta"
