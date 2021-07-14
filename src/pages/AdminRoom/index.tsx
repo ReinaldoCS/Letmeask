@@ -83,7 +83,7 @@ function AdminRoom() {
   }
 
   return (
-    <div id="pagead-min-room">
+    <div id="page-admin-room">
       <header>
         <div className="content">
           <img src={isDark ? logoImgDark : logoImg} alt="Letmeask" />
