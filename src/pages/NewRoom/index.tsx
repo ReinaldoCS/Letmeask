@@ -42,7 +42,9 @@ function NewRoom() {
   return (
     <div id="page-rooms">
       <aside>
-        <img src={boosterImg} alt="ilustração simbolizando evolução" />
+        <div>
+          <img src={boosterImg} alt="ilustração simbolizando evolução" />
+        </div>
         <strong>Juntos podemos ir ainda mais longe!</strong>
         <p>Aprenda e compartilhe conhecimento com outras pessoas</p>
       </aside>

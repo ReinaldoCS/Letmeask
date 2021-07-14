@@ -43,13 +43,17 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 62.5%;
+}
+
 body {
   background: var(--background-primary);
   color: var(--text-primary);
 }
 
 body, input, button, textarea {
-  font: 400 16px 'Roboto', sans-serif;
+  font: 400 1.6rem 'Roboto', sans-serif;
 }
 
 button {
