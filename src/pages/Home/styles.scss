@@ -180,16 +180,21 @@
 @media only screen and (max-width: 740px) {
   #page-auth {
     flex-direction: column;
+    overflow: scroll;
+    scroll-snap-type: y mandatory;
 
     aside {
+      display: flex;
       width: 100%;
       min-height: 100vh;
       padding: 0px 10% 20%;
+      scroll-snap-align: start;
     }
 
     main {
       width: 100%;
       min-height: 100vh;
+      scroll-snap-align: center;
     }
   }
 }
